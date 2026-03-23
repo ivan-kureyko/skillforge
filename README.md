@@ -13,7 +13,7 @@ Project is under active development.
 ## Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/skillforge.git
+git clone https://github.com/ivan-kureyko/skillforge.git
 cd skillforge
 
 cp .env.example .env
