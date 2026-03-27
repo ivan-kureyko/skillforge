@@ -6,6 +6,8 @@ SkillForge is a REST API-based application for managing personal learning (cours
 - Laravel 12
 - MySQL
 - Docker (Laravel Sail)
+- Laravel Sanctum (API authentication)
+- Scribe (API documentation)
 
 ## Status
 Project is under active development.
@@ -19,4 +21,4 @@ cd skillforge
 cp .env.example .env
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan key:generate
-./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan migrate --seed
