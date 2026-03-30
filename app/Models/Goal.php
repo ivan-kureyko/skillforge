@@ -5,6 +5,8 @@ namespace App\Models;
 use Database\Factories\GoalFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Goal extends Model
 {
@@ -22,26 +24,20 @@ class Goal extends Model
         'status',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function progress()
+    public function progresses(): HasMany
     {
         return $this->hasMany(Progress::class);
     }
-
-    public function skill()
-    {
-        return $this->belongsTo(Skill::class);
-    }
-
 
     public function isNew(): bool
     {

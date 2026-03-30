@@ -5,6 +5,9 @@ namespace App\Models;
 use Database\Factories\CourseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Course extends Model
 {
@@ -14,28 +17,21 @@ class Course extends Model
     protected $fillable = [
         'title',
         'description',
-        'skill_id',
         'author_id',
     ];
 
-    public function skills()
+    public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class);
     }
 
-    public function author()
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function goals()
+    public function goals(): HasMany
     {
         return $this->hasMany(Goal::class);
     }
-
-    public function progresses()
-    {
-        return $this->hasMany(Progress::class);
-    }
-
 }

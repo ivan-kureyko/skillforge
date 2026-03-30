@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -54,30 +56,16 @@ class User extends Authenticatable
         ];
     }
 
-    // Relationships
-    public function courses()
+    public function courses(): HasMany
     {
         return $this->hasMany(Course::class, 'author_id');
     }
 
-    public function goals()
+    public function goals(): HasMany
     {
         return $this->hasMany(Goal::class);
     }
 
-    public function skills()
-    {
-        return $this->belongsToMany(Skill::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return bool
-     */
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;

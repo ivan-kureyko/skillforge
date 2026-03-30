@@ -22,7 +22,6 @@ class CourseSeeder extends Seeder
             Course::factory()
                 ->count(rand(1, 3))
                 ->create([
-                    'skill_id' => $skill->id,
                     'author_id' => $authors->random()->id,
                 ]);
         }
