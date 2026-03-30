@@ -34,7 +34,7 @@ class Goal extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function progresses(): HasMany
+    public function progressEntries(): HasMany
     {
         return $this->hasMany(Progress::class);
     }
