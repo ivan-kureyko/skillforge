@@ -15,6 +15,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('skills', SkillController::class);
     Route::apiResource('courses', CourseController::class);
-    Route::apiResource('goals', GoalController::class)
-        ->middleware('auth:sanctum');
+    Route::apiResource('goals', GoalController::class);
 });

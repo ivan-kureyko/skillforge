@@ -1,52 +1,183 @@
 # SkillForge
 
-SkillForge is a REST API-based application for managing personal learning (courses, skills, goals, and progress).
+SkillForge is a REST API application for managing personal learning,
+including courses, skills, goals, and progress tracking.
 
-## Tech Stack
-- Laravel 13
-- MySQL
-- Docker (Laravel Sail)
-- Laravel Sanctum (API authentication)
-- Scribe (API documentation)
+------------------------------------------------------------------------
 
-## Status
-Project is under active development.
+## 🚀 Features
 
-## API Documentation
+-   User authentication (Laravel Sanctum)
+-   Course management
+-   Skill management
+-   Goal tracking
+-   Progress history tracking
+-   Policy-based authorization (users can access only their own data)
 
-Available at:
-http://localhost/docs
+------------------------------------------------------------------------
 
-## Authentication
+## 🛠 Tech Stack
 
-This API uses Bearer token authentication.
+-   Laravel 13
+-   MySQL
+-   Docker (Laravel Sail)
+-   Laravel Sanctum (API authentication)
+-   Scribe (API documentation)
+
+------------------------------------------------------------------------
+
+## ⚙️ Installation
+
+``` bash
+git clone https://github.com/ivan-kureyko/skillforge.git
+cd skillforge
+
+cp .env.example .env
+
+./vendor/bin/sail up -d
+
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate --seed
+```
+
+------------------------------------------------------------------------
+
+## 🔐 Authentication
+
+This API uses Bearer Token authentication via Laravel Sanctum.
 
 ### Login
 
 POST /api/login
 
 Example credentials:
-- email: admin@skillforge.test
-- password: password
+
+-   email: admin@skillforge.test\
+-   password: password
 
 Use the returned token in requests:
 
 Authorization: Bearer YOUR_TOKEN
 
-## Available Endpoints
+------------------------------------------------------------------------
 
-- POST /api/login - login user
-- POST /api/logout - logout user
-- GET /api/profile - get current authenticated user profile
+## 📚 API Endpoints
 
-## Setup
+### Auth
 
-```bash
-git clone https://github.com/ivan-kureyko/skillforge.git
-cd skillforge
+-   POST /api/login
+-   POST /api/logout
+-   GET /api/profile
 
-cp .env.example .env
-./vendor/bin/sail up -d
-./vendor/bin/sail artisan key:generate
-./vendor/bin/sail artisan migrate --seed
+### Skills
 
+-   GET /api/skills
+-   POST /api/skills
+-   GET /api/skills/{id}
+-   PUT /api/skills/{id}
+-   DELETE /api/skills/{id}
+
+### Courses
+
+-   GET /api/courses
+-   POST /api/courses
+-   GET /api/courses/{id}
+-   PUT /api/courses/{id}
+-   DELETE /api/courses/{id}
+
+### Goals
+
+-   GET /api/goals
+-   POST /api/goals
+-   GET /api/goals/{id}
+-   PUT /api/goals/{id}
+-   DELETE /api/goals/{id}
+
+------------------------------------------------------------------------
+
+## 📖 API Documentation
+
+http://localhost/docs
+
+------------------------------------------------------------------------
+
+## 📦 Data Structure
+
+### Goal
+
+```json
+
+{ 
+    "id": 1,
+    "user_id": 1,
+    "course_id": 2,
+    "status": "in_progress", 
+    "deadline": "2026-04-10",
+    "created_at": "2026-03-30T10:00:00.000000Z"
+}
+```
+
+### Goal Statuses
+
+-   new
+-   in_progress
+-   completed
+
+------------------------------------------------------------------------
+
+## 🔗 Relationships
+
+-   User has many Courses
+-   User has many Goals
+-   Course belongs to User (author)
+-   Course belongs to many Skills
+-   Goal belongs to User
+-   Goal belongs to Course
+-   Goal has many Progress entries
+-   Progress belongs to Goal
+
+------------------------------------------------------------------------
+
+## 🔐 Authorization
+
+-   Users can access only their own goals
+-   Policies are used for authorization
+-   Unauthorized access returns HTTP 403
+
+------------------------------------------------------------------------
+
+## 📥 Example Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "course": {
+        "id": 2,
+        "title": "Laravel Basics"
+      },
+      "status": "in_progress",
+      "deadline": "2026-04-10"
+    }
+  ]
+}
+```
+------------------------------------------------------------------------
+
+## 🧪 Development Status
+
+Project is under active development.
+
+Planned improvements:
+
+-   Progress CRUD
+-   API Resources (clean JSON responses)
+-   Filtering & pagination
+-   Automated tests (PHPUnit)
+
+------------------------------------------------------------------------
+
+## 👨‍💻 Author
+
+Ivan Kureyko
