@@ -14,15 +14,21 @@ class CourseSkillSeeder extends Seeder
      */
     public function run(): void
     {
-        $skills = Skill::all();
         $courses = Course::all();
+        $skillIds = Skill::pluck('id')->all();
 
-        foreach ($skills as $skill) {
-            $randomCourses = $courses->random(rand(1, 3));
+        foreach ($courses as $course) {
+            $pool = $skillIds;
+            $selectedSkillIds = [];
+            $count = rand(1, min(3, count($pool)));
 
-            foreach ($randomCourses as $course) {
-                $skill->courses()->attach($course->id);
+            for ($i = 0; $i < $count; $i++) {
+                $randomKey = array_rand($pool);
+                $selectedSkillIds[] = $pool[$randomKey];
+                unset($pool[$randomKey]);
             }
+
+            $course->skills()->sync($selectedSkillIds);
         }
 
     }
