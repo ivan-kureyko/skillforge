@@ -50,7 +50,37 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Login successful',
             'token' => $token,
-            'user' => $user,
+            'user' => [
+                'id' => $user->id,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'role' => $user->role,
+            ]
+        ]);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logged out successfully',
+        ]);
+    }
+
+    public function profile(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'user' => [
+                'id' => $user->id,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'role' => $user->role,
+            ],
         ]);
     }
 }

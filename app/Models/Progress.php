@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\ProgressFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Progress extends Model
 {
@@ -17,13 +18,8 @@ class Progress extends Model
         'note',
     ];
 
-    public function goal()
+    public function goal(): BelongsTo
     {
         return $this->belongsTo(Goal::class);
-    }
-
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
     }
 }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->foreignIdFor(Skill::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class, 'author_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
