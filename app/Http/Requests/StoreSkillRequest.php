@@ -21,4 +21,18 @@ class StoreSkillRequest extends FormRequest
             'description' => ['nullable', 'string'],
         ];
     }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'title' => [
+                'description' => 'The title of the skill.',
+                'example' => 'Laravel',
+            ],
+            'description' => [
+                'description' => 'A short description of the skill.',
+                'example' => 'Backend framework for building web applications.',
+            ],
+        ];
+    }
 }
