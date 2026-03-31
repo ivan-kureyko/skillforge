@@ -8,6 +8,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @group Authentication
+ *
+ * Endpoints for user authentication and profile management.
+ */
 class AuthController extends Controller
 {
     /**
@@ -61,6 +66,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Log out user
+     *
+     * Revoke the current access token.
+     */
     public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
@@ -70,6 +80,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Get the current user profile
+     *
+     * Return the authenticated user's profile data.
+     */
     public function profile(Request $request): JsonResponse
     {
         $user = $request->user();

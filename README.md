@@ -11,7 +11,7 @@ including courses, skills, goals, and progress tracking.
 -   Course management
 -   Skill management
 -   Goal tracking
--   Progress history tracking
+-   Progress tracking (history of updates)
 -   Policy-based authorization (users can access only their own data)
 
 ------------------------------------------------------------------------
@@ -52,7 +52,7 @@ POST /api/login
 
 Example credentials:
 
--   email: admin@skillforge.test\
+-   email: admin@skillforge.test
 -   password: password
 
 Use the returned token in requests:
@@ -93,11 +93,41 @@ Authorization: Bearer YOUR_TOKEN
 -   PUT /api/goals/{id}
 -   DELETE /api/goals/{id}
 
+### Progress
+
+-   GET /api/progress
+-   POST /api/progress
+-   GET /api/progress/{id}
+-   PUT /api/progress/{id}
+-   DELETE /api/progress/{id}
+
 ------------------------------------------------------------------------
 
 ## 📖 API Documentation
 
-http://localhost/docs
+API documentation is generated using Scribe.
+
+To regenerate docs:
+
+``` bash
+./vendor/bin/sail artisan scribe:generate
+```
+
+Docs are available at: http://localhost/docs
+
+------------------------------------------------------------------------
+
+## 📥 Example Request
+
+POST /api/courses
+
+``` json
+{
+  "title": "Laravel for Beginners",
+  "description": "Intro course",
+  "skill_ids": [1, 2]
+}
+```
 
 ------------------------------------------------------------------------
 
@@ -105,15 +135,14 @@ http://localhost/docs
 
 ### Goal
 
-```json
-
-{ 
-    "id": 1,
-    "user_id": 1,
-    "course_id": 2,
-    "status": "in_progress", 
-    "deadline": "2026-04-10",
-    "created_at": "2026-03-30T10:00:00.000000Z"
+``` json
+{
+  "id": 1,
+  "user_id": 1,
+  "course_id": 2,
+  "status": "in_progress",
+  "deadline": "2026-04-10",
+  "created_at": "2026-03-30T10:00:00.000000Z"
 }
 ```
 
@@ -140,7 +169,7 @@ http://localhost/docs
 
 ## 🔐 Authorization
 
--   Users can access only their own goals
+-   Users can access only their own data
 -   Policies are used for authorization
 -   Unauthorized access returns HTTP 403
 
@@ -148,7 +177,7 @@ http://localhost/docs
 
 ## 📥 Example Response
 
-```json
+``` json
 {
   "data": [
     {
@@ -163,6 +192,7 @@ http://localhost/docs
   ]
 }
 ```
+
 ------------------------------------------------------------------------
 
 ## 🧪 Development Status
@@ -171,7 +201,6 @@ Project is under active development.
 
 Planned improvements:
 
--   Progress CRUD
 -   API Resources (clean JSON responses)
 -   Filtering & pagination
 -   Automated tests (PHPUnit)

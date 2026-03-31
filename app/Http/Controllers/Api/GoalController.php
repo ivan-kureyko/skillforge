@@ -9,6 +9,11 @@ use App\Models\Goal;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Goals
+ *
+ * Endpoints for managing user goals.
+ */
 class GoalController extends Controller
 {
     public function index(Request $request): JsonResponse

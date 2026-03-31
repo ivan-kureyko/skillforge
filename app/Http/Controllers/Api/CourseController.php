@@ -6,7 +6,13 @@ use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Http\Controllers\Controller;
 
+/**
+ * @group Courses
+ *
+ * Endpoints for managing user courses.
+ */
 class CourseController extends Controller
 {
     public function index(): JsonResponse

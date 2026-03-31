@@ -8,6 +8,11 @@ use App\Http\Requests\UpdateSkillRequest;
 use App\Models\Skill;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Skills
+ *
+ * Endpoints for managing user skills.
+ */
 class SkillController extends Controller
 {
     public function index(): JsonResponse

@@ -25,4 +25,22 @@ class StoreGoalRequest extends FormRequest
             ],
         ];
     }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'title' => [
+                'description' => 'The title of the goal.',
+                'example' => 'Complete Laravel API project',
+            ],
+            'course_id' => [
+                'description' => 'The ID of the course linked to this goal.',
+                'example' => 1,
+            ],
+            'deadline' => [
+                'description' => 'The target completion date. It must be a future date.',
+                'example' => '2026-04-30',
+            ],
+        ];
+    }
 }

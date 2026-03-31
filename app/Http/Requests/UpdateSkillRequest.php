@@ -29,4 +29,18 @@ class UpdateSkillRequest extends FormRequest
             'description' => ['nullable', 'string'],
         ];
     }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'title' => [
+                'description' => 'The updated title of the skill.',
+                'example' => 'Laravel Advanced',
+            ],
+            'description' => [
+                'description' => 'The updated description of the skill.',
+                'example' => 'Advanced backend development with Laravel.',
+            ],
+        ];
+    }
 }
